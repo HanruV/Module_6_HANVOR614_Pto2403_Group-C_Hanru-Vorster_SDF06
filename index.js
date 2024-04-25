@@ -26,8 +26,15 @@ addButtonEl.addEventListener("click", function() {
     let inputValue = inputFieldEl.value
     push(shoppingListInDB, inputValue)
     //clearing input field 
-    inputFieldEl.value = ""
+    clearInputFieldEl()
     // adding to on screen list
-    shoppingListEl.innerHTML += `<li>${inputValue}</li>`   
+    appendItemToShoppingListEl(inputValue)
 })
 
+function clearInputFieldEl() {
+    inputFieldEl.value = ""
+}
+
+function appendItemToShoppingListEl(itemValue) {
+    shoppingListEl.innerHTML += `<li>${itemValue}</li>`
+}
