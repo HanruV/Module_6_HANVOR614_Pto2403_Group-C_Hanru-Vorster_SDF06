@@ -10,18 +10,24 @@ const appSettings = {
     databaseURL: "https://playground-3e8b9-default-rtdb.europe-west1.firebasedatabase.app/"
 }
 
+
 const app = initializeApp(appSettings)
 const database = getDatabase(app)
 const shoppingListInDB = ref(database, "shoppingList")
 
-
-
-// app logic
+// global variables
 const inputFieldEl = document.getElementById("input-field")
 const addButtonEl = document.getElementById("add-button")
+const shoppingListEl = document.getElementById("shopping-list")
 
+// button functionality (push input values to screen & database)
 addButtonEl.addEventListener("click", function() {
+    // adding to database
     let inputValue = inputFieldEl.value
     push(shoppingListInDB, inputValue)
-    console.log(inputValue)
+    //clearing input field 
+    inputFieldEl.value = ""
+    // adding to on screen list
+    shoppingListEl.innerHTML += `<li>${inputValue}</li>`   
 })
+
