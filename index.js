@@ -38,12 +38,12 @@ onValue(shoppingListInDB, function(snapshot) {
 
     for (let i = 0; i < itemsArray.length; i++) {
         // adding variables to targer either keys(IDs) or values
-        let currentItem = itemsArray[i]
-        let currentItemID = currentItem[0]
-        let currentItemValue = currentItem[1]
+        let currentItem = itemsArray[i] //selects both
+        let currentItemID = currentItem[0] //selects the ID
+        let currentItemValue = currentItem[1] //selects the value
         
         // add the items to the displayed list in app
-        appendItemToShoppingListEl(currentItemValue)
+        appendItemToShoppingListEl(currentItem)
     }
 })
 
@@ -53,10 +53,16 @@ function clearInputFieldEl() {
     inputFieldEl.value = ""
 }
 // refactored function for adding on screen list
-function appendItemToShoppingListEl(itemValue) {
-    shoppingListEl.innerHTML += `<li>${itemValue}</li>`
-}
 
 function clearShoppingListEl() {
     shoppingListEl.innerHTML = ""
+}
+
+function appendItemToShoppingListEl(item) {
+    let itemID = item[0]
+    let itemValue = item[1]
+
+    let newEl = document.createElement("li")
+    newEl.textContent = itemValue
+    shoppingListEl.append(newEl)
 }
