@@ -37,12 +37,19 @@ function appendItemToShoppingListEl(itemValue) {
     shoppingListEl.innerHTML += `<li>${itemValue}</li>`
 }
 
+function clearShoppingListEl() {
+    shoppingListEl.innerHTML = ""
+}
+
 // fetching items from database
 onValue(shoppingListInDB, function(snapshot) {
     let itemsArray = Object.values(snapshot.val())
-    shoppingListEl.innerHTML = ""
+    // clear the data on list before adding new data
+    clearShoppingListEl()
+
     for (let i = 0; i < itemsArray.length; i++) {
         console.log(itemsArray[i])
+        // add the items to the displayed list in app
         appendItemToShoppingListEl(itemsArray[i])
     }
 })
