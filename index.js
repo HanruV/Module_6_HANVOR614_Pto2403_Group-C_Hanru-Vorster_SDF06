@@ -30,11 +30,11 @@ addButtonEl.addEventListener("click", function() {
     // adding to on screen list
     appendItemToShoppingListEl(inputValue)
 })
-
+// refacored function for clearing input field
 function clearInputFieldEl() {
     inputFieldEl.value = ""
 }
-
+// refactored function for adding on screen list
 function appendItemToShoppingListEl(itemValue) {
     shoppingListEl.innerHTML += `<li>${itemValue}</li>`
 }
