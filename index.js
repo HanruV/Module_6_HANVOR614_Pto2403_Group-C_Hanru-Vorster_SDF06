@@ -27,8 +27,6 @@ addButtonEl.addEventListener("click", function() {
     push(shoppingListInDB, inputValue)
     //clearing input field 
     clearInputFieldEl()
-    // adding to on screen list
-    appendItemToShoppingListEl(inputValue)
 })
 // refacored function for clearing input field
 function clearInputFieldEl() {
@@ -42,7 +40,7 @@ function appendItemToShoppingListEl(itemValue) {
 // fetching items from database
 onValue(shoppingListInDB, function(snapshot) {
     let itemsArray = Object.values(snapshot.val())
-
+    shoppingListEl.innerHTML = ""
     for (let i = 0; i < itemsArray.length; i++) {
         console.log(itemsArray[i])
         appendItemToShoppingListEl(itemsArray[i])
