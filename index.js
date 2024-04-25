@@ -28,6 +28,26 @@ addButtonEl.addEventListener("click", function() {
     //clearing input field 
     clearInputFieldEl()
 })
+
+
+// fetching items from database
+onValue(shoppingListInDB, function(snapshot) {
+    let itemsArray = Object.entries(snapshot.val())
+    // clear the data on list before adding new data
+    clearShoppingListEl()
+
+    for (let i = 0; i < itemsArray.length; i++) {
+        // adding variables to targer either keys(IDs) or values
+        let currentItem = itemsArray[i]
+        let currentItemID = currentItem[0]
+        let currentItemValue = currentItem[1]
+        
+        // add the items to the displayed list in app
+        appendItemToShoppingListEl(currentItemValue)
+    }
+})
+
+
 // refacored function for clearing input field
 function clearInputFieldEl() {
     inputFieldEl.value = ""
@@ -40,16 +60,3 @@ function appendItemToShoppingListEl(itemValue) {
 function clearShoppingListEl() {
     shoppingListEl.innerHTML = ""
 }
-
-// fetching items from database
-onValue(shoppingListInDB, function(snapshot) {
-    let itemsArray = Object.values(snapshot.val())
-    // clear the data on list before adding new data
-    clearShoppingListEl()
-
-    for (let i = 0; i < itemsArray.length; i++) {
-        console.log(itemsArray[i])
-        // add the items to the displayed list in app
-        appendItemToShoppingListEl(itemsArray[i])
-    }
-})
