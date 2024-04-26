@@ -4,7 +4,7 @@ Make it so that when you click the 'Add to cart' button, whatever is written in 
 */
 // setting up the databse
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js"
-import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"
+import { getDatabase, ref, push, onValue, remove } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"
 
 const appSettings = {
     databaseURL: "https://playground-3e8b9-default-rtdb.europe-west1.firebasedatabase.app/"
@@ -64,4 +64,10 @@ function appendItemToShoppingListEl(item) {
     let newEl = document.createElement("li")
     newEl.textContent = itemValue
     shoppingListEl.append(newEl)
+
+    newEl.addEventListener("click", function() {
+        let exactLocationOfItemInDB = ref(database, `shoppingList/${itemID}`)
+        remove(exactLocationOfItemInDB)
+
+    })
 }
