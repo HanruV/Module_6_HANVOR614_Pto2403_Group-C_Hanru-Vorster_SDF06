@@ -53,7 +53,6 @@ function clearInputFieldEl() {
     inputFieldEl.value = ""
 }
 // refactored function for adding on screen list
-
 function clearShoppingListEl() {
     shoppingListEl.innerHTML = ""
 }
