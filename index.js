@@ -32,19 +32,25 @@ addButtonEl.addEventListener("click", function() {
 
 // fetching items from database
 onValue(shoppingListInDB, function(snapshot) {
-    let itemsArray = Object.entries(snapshot.val())
-    // clear the data on list before adding new data
-    clearShoppingListEl()
 
-    for (let i = 0; i < itemsArray.length; i++) {
-        // adding variables to targer either keys(IDs) or values
-        let currentItem = itemsArray[i] //selects both
-        let currentItemID = currentItem[0] //selects the ID
-        let currentItemValue = currentItem[1] //selects the value
+    if (snapshot.exists()) {
+        let itemsArray = Object.entries(snapshot.val())
+    // clear the date on list before adding new data
+        clearShoppingListEl()
         
-        // add the items to the displayed list in app
-        appendItemToShoppingListEl(currentItem)
+        for (let i = 0; i < itemsArray.length; i++) {
+    // adding variables to target either keys(IDs) or values
+            let currentItem = itemsArray[i] //selects both
+            let currentItemID = currentItem[0] //selects the ID
+            let currentItemValue = currentItem[1] //selects the value
+    // add the items to the displayed list in app
+            appendItemToShoppingListEl(currentItem)
+        }    
+    } else {
+        shoppingListEl.innerHTML = "No items here... yet"
     }
+    
+    
 })
 
 
@@ -64,10 +70,9 @@ function appendItemToShoppingListEl(item) {
     let newEl = document.createElement("li")
     newEl.textContent = itemValue
     shoppingListEl.append(newEl)
-
+// remove items from list and database when clicked
     newEl.addEventListener("click", function() {
         let exactLocationOfItemInDB = ref(database, `shoppingList/${itemID}`)
         remove(exactLocationOfItemInDB)
-
     })
 }
